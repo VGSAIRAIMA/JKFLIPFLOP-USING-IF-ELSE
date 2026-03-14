@@ -33,16 +33,77 @@ By using three variable K-Map, we can get the simplified expression for next sta
 The maximum possible groupings of adjacent ones are already shown in the figure. Therefore, the simplified expression for next state Qt+1t+1 is Q(t+1)=JQ(t)′+K′Q(t)Q(t+1)=JQ(t)′+K′Q(t)
 
 **Procedure**
+```
+Open Intel Quartus software.
 
-/* write all the steps invloved */
+Create a new project by selecting File → New Project Wizard and specify the project directory, project name, and top-level entity name.
 
+Select the target FPGA device and finish the project setup.
+
+Create a new Verilog HDL file by selecting File → New → Verilog HDL File.
+
+Write the Verilog code for the JK Flip-Flop using if-else statements according to the JK flip-flop truth table.
+
+Save the file with a .v extension and add it to the project.
+
+Compile the design using Processing → Start Compilation to check for syntax errors.
+
+After successful compilation, open the Simulation Waveform Editor and create a Vector Waveform File (.vwf).
+
+Insert the input and output nodes (J, K, Clock, Q, Q̅) using Insert → Insert Node or Bus.
+
+Apply different input combinations for J and K along with the clock signal (00, 01, 10, 11) to verify the behavior.
+
+Run the simulation to generate the timing waveform.
+
+Observe the output waveform and compare it with the JK flip-flop truth table.
+```
 **PROGRAM**
+```
+/* Program for flipflops and verify its truth table in quartus using Verilog programming.
+Developed by: RegisterNumber:212225040359 */
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
-*/
+module exp03(q, qb,j,k,clock,reset);
+    input j,k,clock,reset;
+    output reg q, qb;
+	 
+always @ (posedge (clock))
+
+    begin 
+        if (!reset)
+            begin
+               q <= q;
+               qb <=qb;
+            end   
+        
+else
+ //Write logic for JK flipflop using if else statement for four conditions
+
+begin
+               if (j == 0 && k == 0)
+                    begin
+                    q <= q;
+                    qb <= qb;
+                    end 
+		else if (j != k)
+                    begin
+                    q <= j;
+                    qb <= k;
+                    end
+               else if (j == 1 && k == 1) 
+                    begin 
+                    q <= ~q; 
+                    qb <= ~qb; 
+                    end 
+            end
+end  
+endmodule
+```
+
 
 **RTL LOGIC FOR FLIPFLOPS**
-
+![image](https://github.com/VGSAIRAIMA/JKFLIPFLOP-USING-IF-ELSE/blob/main/exp031.png)
 **TIMING DIGRAMS FOR FLIP FLOPS**
-
+![image](https://github.com/VGSAIRAIMA/JKFLIPFLOP-USING-IF-ELSE/blob/main/exp032.png)
 **RESULTS**
+The JK Flip-Flop was successfully implemented using Verilog HDL with if-else statements in Intel Quartus .
